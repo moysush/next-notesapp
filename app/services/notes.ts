@@ -1,8 +1,9 @@
 import { db } from "@/db";
 import { notes } from "@/db/schema";
+import { Note } from "@/types";
 import { eq } from "drizzle-orm";
 
-export const getNotes = async (importantOnly: boolean) => {
+export const getNotes = async (importantOnly: boolean): Promise<Note[]> => {
   if (importantOnly) {
     return db.query.notes.findMany({
       where: eq(notes.important, true),

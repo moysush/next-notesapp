@@ -1,15 +1,10 @@
 "use client";
 
+import { Note } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 
-type Note = {
-  id: number;
-  content: string;
-  important: boolean;
-};
-
-const NoteList = ({notes}: { notes: Note[] }) => {
+const NoteList = ({ notes }: { notes: Note[] }) => {
   const [showImportant, setShowImportant] = useState(false);
 
   const notesToShow = showImportant ? notes.filter((n) => n.important) : notes;
