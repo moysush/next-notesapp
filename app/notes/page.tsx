@@ -8,7 +8,7 @@ const Notes = async ({
 }) => {
   const { important } = await searchParams;
   const showImportant = important === "true";
-  const allNotes = getNotes();
+  const allNotes = await getNotes(showImportant);
   const notes = showImportant ? allNotes.filter((n) => n.important) : allNotes;
   return (
     <div>
