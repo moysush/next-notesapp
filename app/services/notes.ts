@@ -1,5 +1,5 @@
-import { db } from "@/db";
-import { notes } from "@/db/schema";
+import { db } from "@/app/db";
+import { notes } from "@/app/db/schema";
 import { Note } from "@/types";
 import { eq } from "drizzle-orm";
 
@@ -13,7 +13,7 @@ export const getNotes = async (importantOnly: boolean): Promise<Note[]> => {
 };
 
 export const addNote = async (content: string, important: boolean) => {
-  await db.insert(notes).values({ content, important });
+  await db.insert(notes).values({ content, important, userId: 1 });
 };
 
 export const getNoteById = (id: number) => {
