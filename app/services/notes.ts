@@ -1,7 +1,7 @@
 import { db } from "@/app/db";
 import { notes } from "@/app/db/schema";
 import { Note } from "@/types";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 export const getNotes = async (importantOnly: boolean): Promise<Note[]> => {
   if (importantOnly) {
@@ -13,7 +13,12 @@ export const getNotes = async (importantOnly: boolean): Promise<Note[]> => {
 };
 
 export const addNote = async (content: string, important: boolean) => {
-  await db.insert(notes).values({ content, important, userId: 1 });
+  const user = await db.query.users.findFirst({
+    orderBy: sql`RANDOM()`,
+  });
+  await db
+    .insert(notes)
+    .values({ content, important, userId: Number(user?.id) });
 };
 
 export const getNoteById = (id: number) => {
