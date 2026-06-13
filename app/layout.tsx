@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
 import AuthSessionProvider from "./components/SessionProvider";
+import NavBar from "./components/NavBar";
 
 export const metadata: Metadata = {
   title: "Notes App",
@@ -18,15 +18,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <AuthSessionProvider>
-          <nav>
-            <Link href="/">Home</Link>
-            {" | "}
-            <Link href="/notes">Notes</Link>
-            {" | "}
-            <Link href="/notes/new">Create New</Link>
-            {" | "}
-            <Link href={"/users"}>Users</Link>
-          </nav>
+          <NavBar />
           {children}
         </AuthSessionProvider>
       </body>
