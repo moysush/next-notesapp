@@ -1,0 +1,26 @@
+import { registerUser } from "../actions/users";
+
+export default function RegisterUser() {
+  return (
+    <div>
+      <h2>Register</h2>
+      <form action={registerUser}>
+        <div>
+          <label>
+            Username
+            <input type="text" name="username" required />
+          </label>
+          <label>
+            Name
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" required />
+          </label>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  );
+}
