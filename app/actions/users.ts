@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { users } from "../db/schema";
 import { db } from "../db";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const registerUser = async (formData: FormData) => {
   const username = formData.get("username") as string;
@@ -14,5 +15,6 @@ export const registerUser = async (formData: FormData) => {
 
   await db.insert(users).values({ username, name, passwordHash });
 
+  revalidatePath("/login");
   redirect("/login");
 };
