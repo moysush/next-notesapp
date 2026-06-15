@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import AuthSessionProvider from "./components/SessionProvider";
 import NavBar from "./components/NavBar";
+import { NotificationProvider } from "./components/NotificationContext";
+import Notification from "./components/Notification";
 
 export const metadata: Metadata = {
   title: "Notes App",
@@ -18,8 +20,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <AuthSessionProvider>
-          <NavBar />
-          {children}
+          <NotificationProvider>
+            <NavBar />
+            <Notification />
+            {children}
+          </NotificationProvider>
         </AuthSessionProvider>
       </body>
     </html>

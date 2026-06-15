@@ -10,6 +10,7 @@ const Users = async () => {
         {users.map((user) => (
           <Link href={`/users/${user.id}`} key={user.id}>
             {user.name}
+            <br />
           </Link>
         ))}
       </ul>
