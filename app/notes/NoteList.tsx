@@ -1,28 +1,26 @@
-"use client";
-
-import { Note } from "@/types";
 import Link from "next/link";
-import { useState } from "react";
 
-const NoteList = ({ notes }: { notes: Note[] }) => {
-  const [showImportant, setShowImportant] = useState(false);
+type NoteProp = {
+  id: number;
+  content: string;
+  important: boolean;
+};
 
-  const notesToShow = showImportant ? notes.filter((n) => n.important) : notes;
-
+const NoteList = ({ notes }: { notes: NoteProp[] }) => {
   return (
-    <div>
-      <button onClick={() => setShowImportant(!showImportant)}>
-        {showImportant ? "Show all" : "Show Important"}
-      </button>
-      <ul>
-        {notesToShow.map((n) => (
-          <li key={n.id}>
-            <Link href={`/notes/${n.id}`}>{n.content}</Link>
-            {n.important && <strong>(important)</strong>}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="space-y-2">
+      {notes.map((note) => (
+        <li key={note.id} className="border rounded p-3 hover:bg-gray-200">
+          <Link
+            href={`/notes/${note.id}`}
+            className="text-purple-600 hover:underline"
+          >
+            {note.content}
+          </Link>
+          {note.important && <strong className="ml-2">(important)</strong>}
+        </li>
+      ))}
+    </ul>
   );
 };
 

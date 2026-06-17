@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getNotes } from "../services/notes";
+import NoteList from "./NoteList";
+import { Suspense } from "react";
 
 const Notes = async ({
   searchParams,
@@ -21,19 +23,9 @@ const Notes = async ({
           {showImportant ? "Show all" : "Show important only"}
         </Link>
       </div>
-      <ul className="space-y-2">
-        {notes.map((note) => (
-          <li key={note.id} className="border rounded p-3 hover:bg-gray-200">
-            <Link
-              href={`/notes/${note.id}`}
-              className="text-purple-600 hover:underline"
-            >
-              {note.content}
-            </Link>
-            {note.important && <strong className="ml-2">(important)</strong>}
-          </li>
-        ))}
-      </ul>
+      <Suspense fallback={<p>Loading notes...</p>}>
+        <NoteList notes={notes} />
+      </Suspense>
     </div>
   );
 };
